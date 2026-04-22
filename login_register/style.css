@@ -8,13 +8,14 @@
 }
 
 body {
+    background: linear-gradient(135deg, #0f0f0f, #1c1c1c); 
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    background: #1c1c1c; 
-    color: #e2e8f0;
+    margin: 0;
 }
+
 
 .container {
     margin: 0 15px;
@@ -25,11 +26,11 @@ body {
     width: 100%;
     max-width: 420px;
     padding: 35px;
-    background: #1e293b; /* card background */
+    background: #12090a; /* card background */
     border-radius: 12px;
     box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
     display: none;
-    border: 1px solid #334155;
+    border: 1px solid #595c5f;
 }
 
 .form-box.active {
@@ -138,5 +139,8 @@ span {
 .box button {
     display: block;
     width: 260px;
+    margin: 0 auto;
+}
+
     margin: 0 auto;
 }
