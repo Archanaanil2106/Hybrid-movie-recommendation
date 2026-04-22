@@ -171,7 +171,7 @@ button:hover {
 <body>
 <div class="container">
     <h1>What should you watch today?</h1>
-    <div style="position:absolute; top:20px; right:30px; font-size:13px;">
+    <div style="position:absolute; top:20px; right:30px; font-size:13px; margin-bottom: 20px;">
     👤 <span id="username"></span>
     &nbsp;|&nbsp;
     <a href="http://localhost/login_register/logout.php" 
@@ -200,7 +200,7 @@ button:hover {
 const params = new URLSearchParams(window.location.search);
 const user = params.get("user");
 if (user) {
-    document.querySelector("h1").textContent = `🎬 Welcome ${user}, what should you watch today?`;
+    document.querySelector("h1").textContent = ` Welcome ${user}, what should you watch today?`;
     document.getElementById("username").textContent = user;
 }
 const OMDB_KEY = "1ac51540";
@@ -248,7 +248,7 @@ async function getRecommendations() {
     document.getElementById("suggestions").innerHTML = "";
 
     if (!movie) {
-        status.textContent = "⚠️ Please enter a movie name.";
+        status.textContent = "Please enter a movie name.";
         return;
     }
 
@@ -322,5 +322,7 @@ async function fetchMovieCard(title) {
     return div;
 }
 </script>
+</body>
+</html>
 </body>
 </html>
