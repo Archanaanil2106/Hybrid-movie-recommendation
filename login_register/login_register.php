@@ -89,7 +89,8 @@ if (isset($_POST['login'])) {
             $_SESSION['email'] = $user['email'];
 
             
-            header("Location: http://127.0.0.1:5000?user=<?= urlencode($_SESSION['name']); ?>");
+            $username = urlencode($_SESSION['name']);
+            header("Location: http://127.0.0.1:5000?user=$username");
             exit();
         }
     }
