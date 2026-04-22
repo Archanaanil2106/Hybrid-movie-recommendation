@@ -61,8 +61,11 @@ def recommend(movie):
     movie_index = match.index[0]
     movie_id    = new_df.iloc[movie_index].movieId
 
+    # Content scores
     content_scores = list(enumerate(content_similarity[movie_index]))
+    content_vals   = normalize([s[1] for s in content_scores])
 
+    # Collaborative scores
     collab_sim = collab_similarity[movie_id] if movie_id in collab_similarity.columns else None
     collab_scores = []
     for i, row in new_df.iterrows():
@@ -71,14 +74,25 @@ def recommend(movie):
             collab_scores.append(float(collab_sim.loc[mid]))
         else:
             collab_scores.append(0)
+    collab_vals = normalize(collab_scores)
 
+    # Weighted hybrid
     hybrid_scores = [
-        (i, (content_scores[i][1] + collab_scores[i]) / 2)
+        (i, (content_vals[i] * CONTENT_WEIGHT + collab_vals[i] * COLLAB_WEIGHT))
         for i in range(len(content_scores))
     ]
-    hybrid_scores = sorted(hybrid_scores, key=lambda x: x[1], reverse=True)[1:11]
+    hybrid_scores = sorted(hybrid_scores, key=lambda x: x[1], reverse=True)[1:20]
 
-    return [new_df.iloc[i[0]].title for i in hybrid_scores]
+    # Filter unpopular movies
+    result = []
+    for i, score in hybrid_scores:
+        mid = new_df.iloc[i].movieId
+        if mid in popular_movies:
+            result.append(new_df.iloc[i].title)
+        if len(result) == 10:
+            break
+
+    return result if result else None
 
 
 # ── 7. Routes ─────────────────────────────────────────────────
