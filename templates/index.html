@@ -170,8 +170,13 @@ button:hover {
 
 <body>
 <div class="container">
-    <h1>🎬 What should you watch today?</h1>
-
+    <h1>What should you watch today?</h1>
+    <div style="position:absolute; top:20px; right:30px; font-size:13px;">
+    👤 <span id="username"></span>
+    &nbsp;|&nbsp;
+    <a href="http://localhost/login_register/logout.php" 
+       style="color:#ff4c4c; text-decoration:none;">Logout</a>
+</div>
     <div style="display:flex; justify-content:center; align-items:center;">
         <div class="search-wrapper">
             <input
@@ -196,6 +201,7 @@ const params = new URLSearchParams(window.location.search);
 const user = params.get("user");
 if (user) {
     document.querySelector("h1").textContent = `🎬 Welcome ${user}, what should you watch today?`;
+    document.getElementById("username").textContent = user;
 }
 const OMDB_KEY = "1ac51540";
 let suggestionTimeout = null;
