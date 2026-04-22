@@ -89,7 +89,7 @@ if (isset($_POST['login'])) {
             $_SESSION['email'] = $user['email'];
 
             
-            header("Location: user_page.php");
+            header("Location: index.html");
             exit();
         }
     }
