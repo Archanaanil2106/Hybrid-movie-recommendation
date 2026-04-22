@@ -19,7 +19,7 @@ if (!isset($_SESSION['email'])) {
 <body style="background: #fff;">
     
     <div class = "box">
-        <h1>Welcome <span><?= $_SESSION['name']; ?></span>! 👋</h1>
+        <h1>Welcome <span><?= $_SESSION['name']; ?></span>! </h1>
         <p>Ready to find your next favourite movie?</p>
         <button onclick="window.location.href='http://127.0.0.1:5000?user=<?= urlencode($_SESSION['name']); ?>'">
             🎬 Get Recommendations
