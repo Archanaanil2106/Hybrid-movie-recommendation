@@ -1,64 +1,120 @@
-<?php
+@import url('https://fonts.googleapis.com/css2?family=Segoe+UI:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
 
-session_start();
-
-$errors = [
-    'login' => $_SESSION['login_error'] ?? '',
-    'register' => $_SESSION['register_error'] ?? ''
-];
-$activeForm = $_SESSION['active_form'] ?? 'login';
-
-session_unset();
-
-function showError($error) {
-    return !empty($error) ? "<p class='error-message'>$error</p>" : '';
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', 'Poppins', sans-serif;
 }
 
-function isActiveForm($formName, $activeForm) {
-    return $formName === $activeForm ? 'active' : '';
+body {
+    background: linear-gradient(135deg, #0f0f0f, #1c1c1c);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
 }
 
-?>
+.container {
+    width: 100%;
+    max-width: 420px;
+    padding: 20px;
+}
 
-<!DOCTYPE html>
-<html lang="en">
+/* FORM CARD */
+.form-box {
+    width: 100%;
+    padding: 35px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: none;
+}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login & Register Form</title>
-    <link rel="stylesheet" href="style.css"
-</head>
+.form-box.active {
+    display: block;
+}
 
-<body>
-    <div class="container">
-        <div class="form-box <?= isActiveForm('login', $activeForm); ?>" id="login-form">
-            <form action="login_register.php" method="post">
-                <h2>Login</h2>
-                <?= showError($errors['login']); ?>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <button type="submit" name="login">Login</button>
-                <p>Don't have an account? <a href="#" onclick="showForm('register-form')">Register here</a></p>
-            </form>
+/* HEADINGS */
+h2 {
+    font-size: 26px;
+    text-align: center;
+    margin-bottom: 25px;
+    color: #ffffff;
+    font-weight: 600;
+}
 
-        </div>
+/* INPUTS */
+input {
+    width: 100%;
+    padding: 12px 15px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    font-size: 15px;
+    color: white;
+    margin-bottom: 18px;
+    transition: background 0.3s;
+}
 
-        <div class="form-box <?= isActiveForm('register', $activeForm); ?>" id="register-form">
-            <form action="login_register.php" method="post">
-                <h2>Register</h2>
-                <?= showError($errors['register']); ?>
-                <input type="text" name="name" placeholder="Name" required>
-                <input type="email" name="email" placeholder="Email" required>
-                <input type="password" name="password" placeholder="Password" required>
-                <button type="submit" name="register">Register</button>
-                <input type="hidden" name="role" value="user">
-                <p>Already have an account? <a href="#" onclick="showForm('login-form')">Login</a></p>
-            </form>
+input::placeholder {
+    color: #aaa;
+}
 
-        </div>
+input:focus {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 76, 76, 0.5);
+}
 
-    </div>
-    <script src="script.js"></script>
-</body>
-</html>
+/* BUTTON */
+button {
+    width: 100%;
+    padding: 12px;
+    background: #ff4c4c;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 15px;
+    color: white;
+    font-weight: 500;
+    margin-bottom: 18px;
+    transition: all 0.3s;
+}
+
+button:hover {
+    background: #ff2e2e;
+    transform: scale(1.05);
+}
+
+/* LINKS */
+p {
+    font-size: 14px;
+    text-align: center;
+    color: #aaa;
+}
+
+p a {
+    color: #ff4c4c;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+p a:hover {
+    text-decoration: underline;
+}
+
+/* ERROR */
+.error-message {
+    padding: 10px;
+    background: rgba(255, 76, 76, 0.15);
+    border: 1px solid #ff4c4c;
+    border-radius: 8px;
+    font-size: 14px;
+    color: #ff4c4c;
+    text-align: center;
+    margin-bottom: 18px;
+}
